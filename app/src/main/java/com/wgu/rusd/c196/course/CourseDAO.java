@@ -16,7 +16,8 @@ import java.util.List;
 
 @Dao
 public interface CourseDAO {
-    public static final String TAG = CourseDAO.class.getName();
+
+    String TAG = CourseDAO.class.getName();
 
     default void insertCourseWithAssessments(CourseWithAssessments cwa){
         if(cwa.mentor != null) {
@@ -26,8 +27,6 @@ public interface CourseDAO {
         }
         Log.d(TAG, cwa.toString());
         insert(cwa.course);
-
-
     }
 
     @Query("select * from course")
@@ -47,9 +46,6 @@ public interface CourseDAO {
     @Query("select * from course where termId =(:id)")
     LiveData<List<CourseWithAssessments>> courseWithAssessmentsById(long id);
 
-
-    @Insert
-    void insertAll(Course... courses);
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)

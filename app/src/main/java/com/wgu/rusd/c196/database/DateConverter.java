@@ -4,8 +4,6 @@ import android.util.Log;
 
 import androidx.room.TypeConverter;
 
-import com.wgu.rusd.c196.course.CourseActivity;
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;

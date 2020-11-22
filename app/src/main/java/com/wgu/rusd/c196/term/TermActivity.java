@@ -63,7 +63,6 @@ public class TermActivity extends AppCompatActivity implements EditCourse {
             term = new Term();
         }
 
-        viewModel = new ViewModelProvider(this, new CourseListViewModelFactory(getApplication(),term.termId)).get(CourseListViewModel.class);
 
         title.setText(term.title);
 
@@ -79,6 +78,7 @@ public class TermActivity extends AppCompatActivity implements EditCourse {
         new DateListener(endDate, TermActivity.this, (localDate) -> term.end = localDate);
 
         if (term.termId != null) {
+            viewModel = new ViewModelProvider(this, new CourseListViewModelFactory(getApplication(),term.termId)).get(CourseListViewModel.class);
             viewModel.getList().observe(this, s -> {
                 Log.d(this.getClass().getName(), s.toString());
                 if (adapter == null) {

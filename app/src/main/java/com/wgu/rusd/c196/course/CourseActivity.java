@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -50,6 +51,8 @@ public class CourseActivity extends AppCompatActivity {
     TextView phoneNumber;
     TextView email;
     TextView notes;
+
+    Button addAssessmentButton;
 
     Spinner statusSpinner;
     Spinner termSpinner;
@@ -127,6 +130,11 @@ public class CourseActivity extends AppCompatActivity {
             courseWithAssessments = new CourseWithAssessments();
             DateListener startDateListener = new DateListener(startDate, CourseActivity.this, (localDate) -> courseWithAssessments.course.startDate = localDate);
             DateListener endDateListener = new DateListener(endDate, CourseActivity.this, (localDate) -> courseWithAssessments.course.endDate = localDate);
+            addAssessmentButton = findViewById(R.id.add_assessment);
+            addAssessmentButton.setEnabled(false);
+            addAssessmentButton.setText("(Save course to add Assessments)");
+
+
         }
     }
 

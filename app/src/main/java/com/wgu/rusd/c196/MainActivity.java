@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,18 +19,15 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
 
 import com.wgu.rusd.c196.assessment.Assessment;
 import com.wgu.rusd.c196.course.Course;
 import com.wgu.rusd.c196.course.CourseListActivity;
-import com.wgu.rusd.c196.course.CourseWithAssessments;
 import com.wgu.rusd.c196.database.DateConverter;
 import com.wgu.rusd.c196.mentor.MentorListActivity;
 import com.wgu.rusd.c196.notifications.MyNotificationPublisher;
 import com.wgu.rusd.c196.term.TermListActivity;
-import com.wgu.rusd.c196.util.MyDateUtil;
 
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String CHANNEL_ID = "course_notification";
     private boolean assessmentNotifications;
     private boolean courseNotification;
-    //private int notificationId = 1;
 
 
     @Override
@@ -62,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         createNotificationChannel();
-        // notifyy();
         initNotifications();
 
     }
@@ -74,20 +68,20 @@ public class MainActivity extends AppCompatActivity {
 
         // get all courses
         if (courseNotification) {
-            getDBInstance(getApplicationContext()).courseDAO().loadAll().observe(this, list -> {
-                list.stream().forEach(course -> {
-                    scheduleCourseNotification(course, false);
-                    scheduleCourseNotification(course, true);
-                });
-            });
+            getDBInstance(getApplicationContext()).courseDAO().loadAll().observe(this, list ->
+                    list.stream().forEach(course -> {
+                        scheduleCourseNotification(course, false);
+                        scheduleCourseNotification(course, true);
+                    }
+            ));
 
         }
 
         // get all assessments
         if (assessmentNotifications) {
-            getDBInstance(getApplicationContext()).assessmentDAO().loadAll().observe(this, list -> {
-                list.stream().forEach(this::scheduleAssessmentNotification);
-            });
+            getDBInstance(getApplicationContext()).assessmentDAO().loadAll().observe(this, list ->
+                    list.stream().forEach(this::scheduleAssessmentNotification)
+            );
 
         }
 
@@ -119,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static AtomicInteger counter = new AtomicInteger(1000);
+    public static final AtomicInteger counter = new AtomicInteger(1000);
 
     public int getID() {
         return counter.getAndIncrement();

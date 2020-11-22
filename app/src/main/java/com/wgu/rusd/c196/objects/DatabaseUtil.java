@@ -33,18 +33,21 @@ public class DatabaseUtil {
         assessmentDAO = db.assessmentDAO();
         termDAO = db.termDAO();
 
-        createTerm(1001l, "Term 1", LocalDate.now(), LocalDate.now().plus(2, ChronoUnit.MONTHS) );
-        createTerm(1002l, "Term 2", LocalDate.now(), LocalDate.now().plus(2, ChronoUnit.MONTHS) );
-        createTerm(1003l, "Term 3 empty", LocalDate.now(), LocalDate.now().plus(2, ChronoUnit.MONTHS) );
+        LocalDate now = LocalDate.now();
+        createTerm(1001l, "Term 1", now, now.plus(3, ChronoUnit.MONTHS) );
+        createTerm(1002l, "Term 2", now.plus(3,ChronoUnit.MONTHS), now.plus(6, ChronoUnit.MONTHS) );
+        createTerm(1003l, "Term 3 empty", now.plus(6, ChronoUnit.MONTHS), now.plus(9, ChronoUnit.MONTHS) );
 
         try {
             Thread.sleep(1000l);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        createDummyData(101l, "Shane Dublin", 1l, "C196", 1l, 1001l);
-        createDummyData(102l, "Math Prof", 2l, "Math",10l, 1002l);
-        createDummyData(103l, "History Buff", 3l, "History",20l, 1002l);
+        createDummyData(101l, "Shane Dublin", 1l, "C196", 1l, 1001l, "This android project is soo hard");
+        createDummyData(102l, "Mr. Math Teacher", 2l, "Math",10l, 1002l,
+                "Why is math so easy?!?!?");
+        createDummyData(103l, "Dr. History Buff", 3l, "History",20l, 1002l,
+                "I love age of empires!!");
 
         try {
             Thread.sleep(1000l);
@@ -78,7 +81,7 @@ public class DatabaseUtil {
 
     }
 
-    public static void createDummyData(Long mentorId, String mentorName, Long courseId, String courseName, Long assessmentId, Long termId ){
+    public static void createDummyData(Long mentorId, String mentorName, Long courseId, String courseName, Long assessmentId, Long termId, String courseNotes ){
         Mentor m = new Mentor();
         m.mentorId = mentorId;
         m.emailAddress = mentorName.replace(" ",".").toLowerCase() + "@gmail.com";
@@ -93,7 +96,7 @@ public class DatabaseUtil {
         c.endDate = LocalDate.now().plus(5, ChronoUnit.MONTHS);
         c.mentorId = mentorId;
 
-        c.notes = "og teacher: " + mentorName + "Course ID: " + courseId;
+        c.notes = courseNotes;
         c.termId = termId;
 
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wgu.rusd.c196">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SettingsActivity"
+            android:label="@string/settings">
+
+        </activity>
+        <activity
+            android:name=".assessment.AssessmentActivity"
+            android:label="@string/assessment" />
+        <activity
+            android:name=".mentor.MentorListActivity"
+            android:label="@string/mentor_list_title" />
+        <activity
+            android:name=".mentor.MentorActivity"
+            android:label="@string/mentor_title" />
+        <activity
+            android:name=".course.CourseListActivity"
+            android:label="@string/course_list_title" />
+        <activity
+            android:name=".course.CourseActivity"
+            android:label="@string/course_title" />
+        <activity
+            android:name=".term.TermActivity"
+            android:label="@string/term" />
+        <activity
+            android:name=".term.TermListActivity"
+            android:label="@string/term_list" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".notifications.MyNotificationPublisher" />
+    </application>
+
+</manifest>

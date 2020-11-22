@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">C196</string>
+    <string name="title_activity_my_basic">MyBasicActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="mentor_title">Mentor</string>
+    <string name="mentor_list_title">Mentors</string>
+    <string name="mentor_add_phone">AddPhone</string>
+    <string name="mentor_add_email">Add Email</string>
+    <string name="save">save</string>
+    <string name="Edit">Edit</string>
+    <string name="Delete">Delete</string>
+    <string name="mentor_name">Mentor Name</string>
+    <string name="mentor_phone_number">Phone Number</string>
+    <string name="mentor_email">Email Address</string>
+    <string name="course_list_title">Course List</string>
+    <string name="course_title">Course</string>
+    <string name="term">Term</string>
+    <string name="term_list">Term List</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="add_assessment">Add Assessment</string>
+    <string name="title_activity_assessment">AssessmentActivity</string>
+    <string name="assessment">Assessment</string>
+    <string name="performance">Performance</string>
+    <string name="objective">Objective</string>
+    <string name="optional_notes">optional notes</string>
+    <string name="goal_date">Goal Date</string>
+    <string name="term_title">Term Title</string>
+    <string name="status">Status</string>
+    <string name="assessment_channel_name">assessment channel</string>
+    <string name="assessment_channel_description">assesment description</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
+</resources>

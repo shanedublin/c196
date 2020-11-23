@@ -1,18 +1,23 @@
 package com.wgu.rusd.c196.term;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 import com.wgu.rusd.c196.course.Course;
 import com.wgu.rusd.c196.course.CourseActivity;
@@ -28,7 +33,7 @@ import java.util.List;
 import static com.wgu.rusd.c196.objects.C196Database.getDBInstance;
 import static com.wgu.rusd.c196.util.MyDateUtil.dtf;
 
-public class TermActivity extends AppCompatActivity implements EditCourse {
+public class TermActivity extends BaseMenuActivity implements EditCourse {
 
     public static final String TAG = TermActivity.class.getName();
 
@@ -63,7 +68,6 @@ public class TermActivity extends AppCompatActivity implements EditCourse {
             term = new Term();
         }
 
-
         title.setText(term.title);
 
         if (term.start != null) {
@@ -90,10 +94,8 @@ public class TermActivity extends AppCompatActivity implements EditCourse {
                     Log.d(TAG, "update");
                     adapter.setList(s);
                 }
-
             });
         }
-
     }
 
     public void save(View view) {
@@ -106,8 +108,24 @@ public class TermActivity extends AppCompatActivity implements EditCourse {
 
     public void delete(View view) {
         AsyncTask.execute(() -> {
-            getDBInstance(getApplicationContext()).termDAO().delete(term);
-            finish();
+            List<Course> list = getDBInstance(getApplicationContext()).courseDAO().findCoursesByTermId(term.termId);
+            if(list.isEmpty()){
+                getDBInstance(getApplicationContext()).termDAO().delete(term);
+                finish();
+            } else {
+                runOnUiThread(() -> {
+                new AlertDialog.Builder(this)
+                        .setTitle("Delete term with courses")
+                        .setMessage("This term has courses associated to it, Would you like to delete the term?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, (dialog, whichButton) ->
+                                        AsyncTask.execute(() -> {
+                                            getDBInstance(getApplicationContext()).termDAO().delete(term);
+                                            finish();
+                                        })
+                        ).setNegativeButton(android.R.string.no, null).show();
+                });
+            }
         });
     }
 

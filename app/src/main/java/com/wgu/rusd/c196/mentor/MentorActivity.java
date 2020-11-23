@@ -8,11 +8,12 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 
 import static com.wgu.rusd.c196.objects.C196Database.getDBInstance;
 
-public class MentorActivity extends AppCompatActivity {
+public class MentorActivity extends BaseMenuActivity {
 
     Mentor mentor;
     EditText text;

@@ -37,35 +37,32 @@ public class DatabaseUtil {
         createTerm(1001l, "Term 1", now, now.plus(3, ChronoUnit.MONTHS) );
         createTerm(1002l, "Term 2", now.plus(3,ChronoUnit.MONTHS), now.plus(6, ChronoUnit.MONTHS) );
         createTerm(1003l, "Term 3 empty", now.plus(6, ChronoUnit.MONTHS), now.plus(9, ChronoUnit.MONTHS) );
+        createTerm(1004l, "Term 4", now.plus(9, ChronoUnit.MONTHS), now.plus(12, ChronoUnit.MONTHS) );
+        createTerm(1005l, "Term 5", now.plus(12, ChronoUnit.MONTHS), now.plus(15, ChronoUnit.MONTHS) );
+        createTerm(1006l, "Term 6", now.plus(15, ChronoUnit.MONTHS), now.plus(18, ChronoUnit.MONTHS) );
+        createTerm(1007l, "Term 7", now.plus(18, ChronoUnit.MONTHS), now.plus(21, ChronoUnit.MONTHS) );
 
         try {
             Thread.sleep(1000l);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         createDummyData(101l, "Shane Dublin", 1l, "C196", 1l, 1001l, "This android project is soo hard");
-        createDummyData(102l, "Mr. Math Teacher", 2l, "Math",10l, 1002l,
-                "Why is math so easy?!?!?");
-        createDummyData(103l, "Dr. History Buff", 3l, "History",20l, 1002l,
-                "I love age of empires!!");
+        createDummyData(102l, "Mr. Math Teacher", 2l, "Math",10l, 1002l, "Why is math so easy?!?!?");
+        createDummyData(103l, "Dr. History Buff", 3l, "History",20l, 1002l,"I love age of empires!!");
+        createDummyData(103l, "Dr. Robotnik", 4l, "Dynamics",30l, 1004l,"Gotta Go Fast");
+        createDummyData(104l, "Nicole Tesla", 5l, "Circuits",40l, 1004l,"Shocking");
+        createDummyData(105l, "Albert Einstein", 6l, "Physics",50l, 1005l,"");
+        createDummyData(106l, "Lenord Nemoy", 7l, "Science 2",60l, 1005l,"Live long and prosper");
+        createDummyData(107l, "Gramar Nazi", 8l, "Writing Comp 1",70l, 1005l,"Papers are ward");
 
         try {
             Thread.sleep(1000l);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-/*
-        execute(() -> {
-            try {
-              //  Thread.sleep(2000);
-                List<Assessment> listLiveData = assessmentDAO.loadAll();
-                Thread.sleep(1000);
-                Log.d(TAG, Arrays.toString(listLiveData.toArray()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        */
+
 
     }
 
@@ -86,7 +83,7 @@ public class DatabaseUtil {
         m.mentorId = mentorId;
         m.emailAddress = mentorName.replace(" ",".").toLowerCase() + "@gmail.com";
         m.name = mentorName;
-        m.phoneNumber = mentorId + "-557-5100";
+        m.phoneNumber = mentorId + "-555-1234";
 
         CourseWithAssessments courseWithAssessments = new CourseWithAssessments();
         Course c = courseWithAssessments.course;
@@ -95,6 +92,7 @@ public class DatabaseUtil {
         c.startDate = LocalDate.now();
         c.endDate = LocalDate.now().plus(5, ChronoUnit.MONTHS);
         c.mentorId = mentorId;
+        c.status = "plan to take";
 
         c.notes = courseNotes;
         c.termId = termId;

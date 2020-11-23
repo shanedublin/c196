@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 import com.wgu.rusd.c196.assessment.AssessmentActivity;
 import com.wgu.rusd.c196.assessment.AssessmentListAdapter;
@@ -39,7 +40,7 @@ import java.util.Arrays;
 import static com.wgu.rusd.c196.objects.C196Database.getDBInstance;
 import static com.wgu.rusd.c196.util.MyDateUtil.dtf;
 
-public class CourseActivity extends AppCompatActivity {
+public class CourseActivity extends BaseMenuActivity {
 
     public static final String TAG = CourseActivity.class.getName();
 
@@ -81,7 +82,7 @@ public class CourseActivity extends AppCompatActivity {
         statusSpinner = findViewById(R.id.course_status);
         termSpinner = findViewById(R.id.term_spinner);
 
-        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.assessment_status_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.course_status_array, android.R.layout.simple_spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         statusSpinner.setAdapter(statusAdapter);
 
@@ -140,10 +141,15 @@ public class CourseActivity extends AppCompatActivity {
 
     public void loadTerms(){
 
-        getDBInstance(getApplicationContext()).termDAO().loadAll().observe(this,list ->{
+        getDBInstance(getApplicationContext()).termDAO().loadAll().observe(this, list ->{
             ArrayAdapter<CharSequence> termAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, list);
             termAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             termSpinner.setAdapter(termAdapter);
+
+            int i = list.indexOf(courseWithAssessments.term);
+            if( i > -1){
+                termSpinner.setSelection(i);
+            }
         });
 
         termSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

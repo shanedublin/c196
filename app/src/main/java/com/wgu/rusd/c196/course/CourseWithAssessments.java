@@ -6,6 +6,7 @@ import androidx.room.Relation;
 import com.wgu.rusd.c196.assessment.Assessment;
 import com.wgu.rusd.c196.course.Course;
 import com.wgu.rusd.c196.mentor.Mentor;
+import com.wgu.rusd.c196.term.Term;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public class CourseWithAssessments implements Serializable {
     entityColumn = "mentorId")
     public Mentor mentor;
 
+    @Relation( parentColumn = "termId",
+    entityColumn = "termId")
+    public Term term;
+
 
     @Override
     public String toString() {
@@ -31,6 +36,7 @@ public class CourseWithAssessments implements Serializable {
                 "course=" + course +
                 ", assessments=" + assessments +
                 ", mentor=" + mentor +
+                ", term=" + term +
                 '}';
     }
 }

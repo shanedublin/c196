@@ -5,6 +5,13 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/course_list_term_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Term"/>
+
+    <TextView
         android:id="@+id/course_list_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

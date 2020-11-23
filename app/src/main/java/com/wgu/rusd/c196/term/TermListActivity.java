@@ -3,18 +3,24 @@ package com.wgu.rusd.c196.term;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 import com.wgu.rusd.c196.course.CourseListAdapter;
+import com.wgu.rusd.c196.settings.SettingsActivity;
 
-public class TermListActivity extends AppCompatActivity {
+public class TermListActivity extends BaseMenuActivity {
 
     public static final String TAG = TermListActivity.class.getName();
 

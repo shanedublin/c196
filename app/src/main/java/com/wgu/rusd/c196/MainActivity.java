@@ -27,6 +27,7 @@ import com.wgu.rusd.c196.course.CourseListActivity;
 import com.wgu.rusd.c196.database.DateConverter;
 import com.wgu.rusd.c196.mentor.MentorListActivity;
 import com.wgu.rusd.c196.notifications.MyNotificationPublisher;
+import com.wgu.rusd.c196.settings.SettingsActivity;
 import com.wgu.rusd.c196.term.TermListActivity;
 
 import java.time.LocalDate;
@@ -35,7 +36,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.wgu.rusd.c196.objects.C196Database.getDBInstance;
 import static com.wgu.rusd.c196.util.MyDateUtil.dtf2;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseMenuActivity {
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -62,10 +63,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initNotifications() {
-
-
-        // schedule a notif one day before
-
         // get all courses
         if (courseNotification) {
             getDBInstance(getApplicationContext()).courseDAO().loadAll().observe(this, list ->
@@ -74,19 +71,14 @@ public class MainActivity extends AppCompatActivity {
                         scheduleCourseNotification(course, true);
                     }
             ));
-
         }
-
         // get all assessments
         if (assessmentNotifications) {
             getDBInstance(getApplicationContext()).assessmentDAO().loadAll().observe(this, list ->
                     list.stream().forEach(this::scheduleAssessmentNotification)
             );
-
         }
-
     }
-
 
     private void scheduleCourseNotification(Course course, boolean startDate) {
 
@@ -138,26 +130,6 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, triggerTime, pendingIntent);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        int itemId = item.getItemId();
-        Log.d(TAG, "item id : " + itemId);
-        if (itemId == R.id.settings_menu_button) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void createNotificationChannel() {

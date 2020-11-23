@@ -7,8 +7,9 @@
     </string-array>
 
     <string-array name="course_status_array">
-        <item>Enrolled</item>
-        <item>Passed</item>
-        <item>Failed</item>
+        <item>in progress</item>
+        <item>completed</item>
+        <item>dropped</item>
+        <item>plan to take</item>
     </string-array>
 </resources>

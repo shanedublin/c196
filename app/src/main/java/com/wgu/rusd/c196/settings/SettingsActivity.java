@@ -1,4 +1,4 @@
-package com.wgu.rusd.c196;
+package com.wgu.rusd.c196.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 

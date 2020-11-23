@@ -11,9 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 
-public class CourseListActivity extends AppCompatActivity implements EditCourse {
+import java.util.List;
+
+public class CourseListActivity extends BaseMenuActivity implements EditCourse {
 
     public static final String TAG = CourseListActivity.class.getName();
 
@@ -33,14 +36,17 @@ public class CourseListActivity extends AppCompatActivity implements EditCourse 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        viewModel.getList().observe(this, s->{
-            Log.d(this.getClass().getName(),s.toString());
+        viewModel.getList().observe(this, s ->{
+            Log.d(this.getClass().getName(), s.toString());
             if(adapter == null) {
                 Log.d(TAG,"new");
-                adapter = new CourseListAdapter(viewModel.getList().getValue(),this);
+                List<CourseWithAssessments> list = viewModel.getList().getValue();
+                list.sort((cwa1, cwa2) -> cwa1.term.start.compareTo(cwa2.term.start));
+                adapter = new CourseListAdapter(list,this);
                 recyclerView.setAdapter(adapter);
             } else {
                 Log.d(TAG,"update");
+                s.sort((cwa1, cwa2) -> cwa1.term.start.compareTo(cwa2.term.start));
                 adapter.setList(s);
             }
 

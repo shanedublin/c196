@@ -36,6 +36,8 @@ public interface CourseDAO {
     @Query("select * from course where courseId =(:id)")
     CourseWithAssessments findCourse(long id);
 
+    @Query("select * from course where termId = (:id)")
+    List<Course> findCoursesByTermId(long id);
 
     @Transaction
     @Query("select * from course")

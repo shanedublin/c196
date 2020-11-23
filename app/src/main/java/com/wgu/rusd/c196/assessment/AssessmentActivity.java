@@ -11,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 import com.wgu.rusd.c196.objects.C196Database;
 import com.wgu.rusd.c196.course.CourseWithAssessments;
@@ -18,7 +19,7 @@ import com.wgu.rusd.c196.util.DateListener;
 
 import static com.wgu.rusd.c196.util.MyDateUtil.dtf;
 
-public class AssessmentActivity extends AppCompatActivity {
+public class AssessmentActivity extends BaseMenuActivity {
 
     public static final String TAG = AssessmentActivity.class.getName();
 

@@ -88,7 +88,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/term"
+            android:text="@string/status"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/course_status"
             app:layout_constraintEnd_toStartOf="@+id/course_status"

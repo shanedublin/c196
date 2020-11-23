@@ -12,10 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.wgu.rusd.c196.R;
+import com.wgu.rusd.c196.assessment.AssessmentActivity;
 
 import java.util.List;
 
 public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.CourseListViewHolder> {
+
+    public static final String TAG = CourseListAdapter.class.getName();
 
     List<CourseWithAssessments> list;
 
@@ -25,7 +28,6 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
         this.editCourse = editCourse;
         notifyDataSetChanged();
     }
-    
 
     @NonNull
     @Override
@@ -35,16 +37,21 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
         View CourseView = inflater.inflate(R.layout.course_list_linear_layout,parent,false);
         CourseListViewHolder vh = new CourseListViewHolder(CourseView);
         return vh;
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseListViewHolder holder, int position) {
-        Course c = list.get(position).course;
+
+        CourseWithAssessments cwa = list.get(position);
+        Course c = cwa.course;
         holder.textView.setText(c.title);
+        if(cwa.term != null) {
+            //Log.d(TAG, cwa.toString());
+            holder.termText.setText(cwa.term.title);
+        }
         holder.editButton.setOnClickListener(view -> {
             long id = c.courseId;
-            Log.d(this.getClass().getName(), "id: " + id);
+            //Log.d(this.getClass().getName(), "id: " + id);
             editCourse.editCourse(id);
         });
     }
@@ -62,10 +69,12 @@ public class CourseListAdapter extends RecyclerView.Adapter<CourseListAdapter.Co
     public static class CourseListViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public Button editButton;
+        public TextView termText;
         CourseListViewHolder(View v) {
             super(v);
             textView = v.findViewById(R.id.course_list_text_view);
             editButton = v.findViewById(R.id.course_list_edit_button);
+            termText = v.findViewById(R.id.course_list_term_text);
         }
     }
 

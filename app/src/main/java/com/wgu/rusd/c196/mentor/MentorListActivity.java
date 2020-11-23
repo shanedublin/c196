@@ -10,9 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 
-public class MentorListActivity extends AppCompatActivity {
+public class MentorListActivity extends BaseMenuActivity {
 
     public static final String TAG = MentorListActivity.class.getName();
 

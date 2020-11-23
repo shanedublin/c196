@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class Term implements Serializable {
+public class Term implements Serializable, Comparable<Term> {
 
     @PrimaryKey(autoGenerate = true)
     public Long termId;
@@ -33,5 +33,13 @@ public class Term implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(termId);
+    }
+
+    @Override
+    public int compareTo(Term term) {
+        if(term == null) {
+            return 1;
+        }
+        return start.compareTo(term.start);
     }
 }

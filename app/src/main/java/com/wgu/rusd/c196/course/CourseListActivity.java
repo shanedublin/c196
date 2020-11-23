@@ -14,6 +14,7 @@ import android.view.View;
 import com.wgu.rusd.c196.BaseMenuActivity;
 import com.wgu.rusd.c196.R;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class CourseListActivity extends BaseMenuActivity implements EditCourse {
@@ -41,16 +42,30 @@ public class CourseListActivity extends BaseMenuActivity implements EditCourse {
             if(adapter == null) {
                 Log.d(TAG,"new");
                 List<CourseWithAssessments> list = viewModel.getList().getValue();
-                list.sort((cwa1, cwa2) -> cwa1.term.start.compareTo(cwa2.term.start));
+                list.sort(Comparator.nullsLast(getCourseWithAssessmentsComparator()));
+                //list.sort(getCourseWithAssessmentsComparator());
                 adapter = new CourseListAdapter(list,this);
                 recyclerView.setAdapter(adapter);
             } else {
                 Log.d(TAG,"update");
-                s.sort((cwa1, cwa2) -> cwa1.term.start.compareTo(cwa2.term.start));
+                s.sort(getCourseWithAssessmentsComparator());
                 adapter.setList(s);
             }
 
         });
+    }
+
+    private Comparator<CourseWithAssessments> getCourseWithAssessmentsComparator() {
+        return (cwa1, cwa2) -> {
+            if(cwa1.term != null && cwa2.term != null) {
+                return cwa1.term.compareTo(cwa2.term);
+            }
+            if(cwa1.term == null)
+                return Integer.MAX_VALUE;
+            if(cwa2.term == null)
+                return Integer.MIN_VALUE;
+            return 0;
+        };
     }
 
     public void newCourse(View view){

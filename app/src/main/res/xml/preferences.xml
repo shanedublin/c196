@@ -2,13 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="course_notifications"
         android:title="Course Notifications"
         android:summary="Course start and end notifications"/>
 
     <SwitchPreference
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="assessment_notifications"
         android:title="Assessment Notifications"
         android:summary="Assessment start and end notifications"/>

@@ -43,7 +43,7 @@ public class DatabaseUtil {
         createTerm(1007l, "Term 7", now.plus(18, ChronoUnit.MONTHS), now.plus(21, ChronoUnit.MONTHS) );
 
         try {
-            Thread.sleep(1000l);
+            Thread.sleep(500l);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -52,16 +52,11 @@ public class DatabaseUtil {
         createDummyData(102l, "Mr. Math Teacher", 2l, "Math",10l, 1002l, "Why is math so easy?!?!?");
         createDummyData(103l, "Dr. History Buff", 3l, "History",20l, 1002l,"I love age of empires!!");
         createDummyData(103l, "Dr. Robotnik", 4l, "Dynamics",30l, 1004l,"Gotta Go Fast");
-        createDummyData(104l, "Nicole Tesla", 5l, "Circuits",40l, 1004l,"Shocking");
-        createDummyData(105l, "Albert Einstein", 6l, "Physics",50l, 1005l,"");
-        createDummyData(106l, "Lenord Nemoy", 7l, "Science 2",60l, 1005l,"Live long and prosper");
-        createDummyData(107l, "Gramar Nazi", 8l, "Writing Comp 1",70l, 1005l,"Papers are ward");
-
-        try {
-            Thread.sleep(1000l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        createDummyData(null, null, 5l, "Secret",35l, null,"Term not assigned");
+        createDummyData(104l, "Nicole Tesla", 6l, "Circuits",40l, 1004l,"Shocking");
+        createDummyData(105l, "Albert Einstein", 7l, "Physics",50l, 1005l,"");
+        createDummyData(106l, "Lenord Nemoy", 8l, "Science 2",60l, 1005l,"Live long and prosper");
+        createDummyData(107l, "Gramar Nazi", 9l, "Writing Comp 1",70l, 1005l,"Papers are ward");
 
 
     }
@@ -80,10 +75,12 @@ public class DatabaseUtil {
 
     public static void createDummyData(Long mentorId, String mentorName, Long courseId, String courseName, Long assessmentId, Long termId, String courseNotes ){
         Mentor m = new Mentor();
-        m.mentorId = mentorId;
-        m.emailAddress = mentorName.replace(" ",".").toLowerCase() + "@gmail.com";
-        m.name = mentorName;
-        m.phoneNumber = mentorId + "-555-1234";
+        if(mentorId != null) {
+            m.mentorId = mentorId;
+            m.emailAddress = mentorName.replace(" ",".").toLowerCase() + "@gmail.com";
+            m.name = mentorName;
+            m.phoneNumber = mentorId + "-555-1234";
+        }
 
         CourseWithAssessments courseWithAssessments = new CourseWithAssessments();
         Course c = courseWithAssessments.course;
@@ -119,7 +116,9 @@ public class DatabaseUtil {
 
         execute(() -> {
 
-            mentorDAO.insert(m);
+            if(mentorId != null) {
+                mentorDAO.insert(m);
+            }
             courseDAO.insert(c);
             assessmentDAO.insert(a);
             assessmentDAO.insert(assessment);

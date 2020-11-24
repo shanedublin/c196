@@ -118,7 +118,7 @@ public class TermActivity extends BaseMenuActivity implements EditCourse {
                         .setTitle("Delete term with courses")
                         .setMessage("This term has courses associated to it, Would you like to delete the term?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, (dialog, whichButton) ->
+                        .setPositiveButton("Yes Delete Term Anyway", (dialog, whichButton) ->
                                         AsyncTask.execute(() -> {
                                             getDBInstance(getApplicationContext()).termDAO().delete(term);
                                             finish();
